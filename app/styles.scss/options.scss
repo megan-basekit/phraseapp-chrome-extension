@@ -12,10 +12,13 @@ div.row.save-button {
   margin-top : 0;
 }
 
-@media (min-width : 550px) {
-  div.row.save-button {
-    margin-top : 6em;
-  }
+.hint {
+  font-size       : 0.7em;
+  margin-bottom   : 0.8em;
+  text-indent     : 2em;
+  background      : url(../images/information.svg)
+                    center left / 15px 15px
+                    no-repeat;
 }
 
 #projects {

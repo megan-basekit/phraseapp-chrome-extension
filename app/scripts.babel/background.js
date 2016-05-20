@@ -1,22 +1,25 @@
 'use strict';
 
-import config from './Config';
+import Storage from './modules/Storage/Storage';
 
 chrome.runtime.onInstalled.addListener(() => {
-  const condition = {
-    pageUrl: {
-      schemes: ['https', 'http']
-    }
-  };
-
-  if (config.domain.length) {
-    condition.pageUrl.hostEquals = config.domain;
-  }
-
   chrome.declarativeContent.onPageChanged.removeRules(null, () => {
+    let domain;
+    const condition = {
+      pageUrl: {
+        schemes: ['https', 'http']
+      }
+    };
+
+    if (null !== (domain = Storage.get('phraseapp.domain'))) {
+      condition.pageUrl.urlContains = domain;
+    }
+
     chrome.declarativeContent.onPageChanged.addRules([{
       conditions: [
-        new chrome.declarativeContent.PageStateMatcher(condition)
+        new chrome.declarativeContent.PageStateMatcher(
+         condition
+        )
       ],
       actions: [new chrome.declarativeContent.ShowPageAction()]
     }]);

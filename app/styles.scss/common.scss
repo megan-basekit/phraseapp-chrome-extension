@@ -29,6 +29,10 @@ form {
   padding : 0;
 }
 
+fieldset, input, select, textarea {
+  margin-bottom: 0.5em;
+}
+
 .relative {
   position : relative;
 }

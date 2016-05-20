@@ -1,5 +1,10 @@
 {
-  "name": "phraseapp",
+  "name": "phraseapp-chrome-extension",
+  "author": {
+    "email": "megan@insanekitty.co.uk",
+    "name": "Megan Davidson",
+    "url": "www.insanekitty.co.uk"
+  },
   "private": true,
   "engines": {
     "node": ">=0.8.0"

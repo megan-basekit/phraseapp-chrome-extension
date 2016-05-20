@@ -23,7 +23,9 @@ class Options {
 
   resetForm() {
     document.getElementById('token').focus();
+
     document.getElementById('token').value        = '';
+    document.getElementById('domain').value       = '';
     document.getElementById('projects').innerHTML = '';
 
     this._disable(
@@ -48,9 +50,16 @@ class Options {
   }
 
   saveOptions() {
+    const domain    = document.getElementById('domain');
     const token     = document.getElementById('token');
     const projects  = document.getElementById('projects');
     const selected  = projects.options[projects.selectedIndex];
+
+    this._saveDomain(
+      domain.value.replace('www.', '')
+                  .replace('http://', '')
+                  .toLowerCase().trim()
+    );
 
     if (Validator.isTokenValid(token.value)) {
       if (typeof selected !== 'undefined') {
@@ -67,8 +76,17 @@ class Options {
         'phraseapp.token',
         token.value
       );
+    }
 
-      Notification.success('Sucessfully saved options');
+    Notification.success('Sucessfully saved options');
+  }
+
+  _saveDomain(domain) {
+    if (Validator.isDomainValid(domain) === true || !domain.length) {
+      Storage.set('phraseapp.domain', domain);
+      document.getElementById('domain').classList.remove('error');
+    } else {
+      document.getElementById('domain').classList.add('error');
     }
   }
 
@@ -163,10 +181,12 @@ class Options {
 
   _init() {
     let token;
+    let domain;
     let projects;
 
     const saveBtn    = document.getElementById('save');
     const tokenInput = document.getElementById('token');
+    const domainInput = document.getElementById('domain');
     const updateBtn  = document.getElementById('update');
 
     if (null !== (token = Storage.get('phraseapp.token'))) {
@@ -174,6 +194,10 @@ class Options {
       this._enable(
         [saveBtn, updateBtn]
       );
+    }
+
+    if (null !== (domain = Storage.get('phraseapp.domain'))) {
+      domainInput.value = domain;
     }
 
     if (null !== (projects = Storage.get('phraseapp.projects'))) {
