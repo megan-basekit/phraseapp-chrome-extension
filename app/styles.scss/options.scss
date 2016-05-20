@@ -1,0 +1,24 @@
+$optionsBackground : #ebeff9;
+$optionsBorder : #9cc2ef;
+
+h2 {
+  border-top       : 1px solid $optionsBorder;
+  background-color : $optionsBackground;
+  padding          : 3px 5px;
+  font-size        : 100%
+}
+
+div.row.save-button {
+  margin-top : 0;
+}
+
+@media (min-width : 550px) {
+  div.row.save-button {
+    margin-top : 6em;
+  }
+}
+
+#projects {
+  height : 8em;
+}
+

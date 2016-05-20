@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "phraseapp",
+    "description": "Phraseapp Translation Importer"
+  },
+  "appDescription": {
+    "message": "Phraseapp Translation Key Importer",
+    "description": "Creating a key and translation for Phraseapp translation service."
+  }
+}

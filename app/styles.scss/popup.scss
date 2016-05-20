@@ -1,0 +1,24 @@
+.add-translation-form {
+  min-width : 25rem;
+}
+
+h4 {
+  margin : 0;
+}
+
+textarea {
+  height : 2em;
+}
+
+#import {
+  margin : 0;
+}
+
+.icon.settings {
+  position : absolute;
+  right    : 0;
+  bottom   : 0;
+  cursor   : pointer;
+  width    : 18px;
+  height   : 18px;
+}

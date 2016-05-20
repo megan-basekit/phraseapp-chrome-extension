@@ -1,0 +1,42 @@
+$buttonDisabled : #bbbbbb;
+$error : #ca3a11;
+
+body {
+  margin : 10px;
+}
+
+h1 {
+  font-size : 156%
+}
+
+h1 img, h4 img {
+  margin         : 1px 5px 0 1px;
+  vertical-align : middle
+}
+
+select.error, input.error, textarea.error {
+  border : 1px solid $error;
+}
+
+input[type=button]:disabled,
+input[type=button]:disabled:hover {
+  color        : $buttonDisabled;
+  border-color : $buttonDisabled;
+}
+
+form {
+  margin  : 0;
+  padding : 0;
+}
+
+.relative {
+  position : relative;
+}
+
+.icon {
+  width   : 48px;
+  height  : 48px;
+  margin  : 0;
+  padding : 0;
+}
+

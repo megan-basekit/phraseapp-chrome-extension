@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- build:css styles/vendor.css -->
+    <link rel="stylesheet" href="bower_components/skeleton/css/normalize.css" />
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/skeleton/css/skeleton.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css styles/options.css -->
+    <link href="styles/common.css" rel="stylesheet">
+    <link href="styles/options.css" rel="stylesheet">
+    <!-- endbuild -->
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,300,600"> -->
+</head>
+<body id="options">
+<form>
+    <div class="row">
+        <div class="two-thirds column">
+            <label for="projects">Projects:</label>
+            <select class="u-full-width" name="projects" id="projects" size="10">
+            </select>
+            <input type="button" id="update" value="Update" disabled>
+        </div>
+        <div class="one-third column">
+            <label for="token">Token</label>
+            <input type="text" class="u-full-width" name="token" id="token" placeholder="Phraseapp token...">
+            <div class="row save-button">
+                <input type="button" name="save" id="save" value="Save" disabled>
+                <input type="button" name="reset" id="reset" value="Reset">
+            </div>
+        </div>
+    </div>
+</form>
+<p>
+    Icons made by <a href="http://www.flaticon.com/authors/gregor-cresnar" title="Gregor Cresnar">Gregor Cresnar</a> and
+    <a href="http://www.flaticon.com/authors/recep-kutuk" title="Recep Kutuk">Recep Kutuk</a> from <a
+        href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a
+        href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+</p>
+<p>
+    <a href="http://www.basekit.com" target="_blank">http://www.basekit.com</a> | <a href="http://www.phraseapp.com" target="_blank">http://www.phraseapp.com</a>
+</p>
+
+<!-- build:js scripts/options-vendor.js -->
+<!-- bower:js -->
+<!-- endbower -->
+<!-- endbuild -->
+
+<!-- build:js scripts/options.js -->
+<script src="scripts/options.js"></script>
+<!-- endbuild -->
+</body>
+</html>

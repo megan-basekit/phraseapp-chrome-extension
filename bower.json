@@ -1,0 +1,11 @@
+{
+  "name": "phraseapp",
+  "private": true,
+  "version": "0.0.0",
+  "dependencies": {
+    "skeleton": "skeleton-css#^2.0.4"
+  },
+  "devDependencies": {
+    "jasmine-core": "jasmine#^2.4.1"
+  }
+}
