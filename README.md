@@ -3,17 +3,25 @@
 Maintainer: [Megan Davidson](https://github.com/meganabigaildavidson)
 
 > Phraseapp Chrome Extension allows you to add new keys with translations to your Phraseapp project, within the browser. You can also select text that you wish to be the key and this will automatically get copied into the 'key' field.
+## Plugin configuration
+
+You need to obtain a Phraseapp API token from your [Phraseapp account page.](https://phraseapp.com/settings/oauth_access_tokens), copy this into the `Extension settings` page and then update your project list.
+
+Selecting one of the projects in the settings page will mark that project as the default project to use for each import (this can be changed from the import popup, but this does not save any changes, this can only be done from the settings page.)
+
+You also have the choice to set what domains the extension will activate on (this requires a reload of the extension from the settings page); this defaults to `basekit.dev` by default. Leaving this blank allows the plugin to be active on every page you visit.
+
 ## Development getting started
 
 ```sh
-# Please make sure that `gulp` and `bower` was installed on your system using this command:
+# Please make sure that `gulp` and `bower` is installed on your system using this command:
 npm install --global gulp bower
 
-# or Using watch to update source continuously:
-gulp watch
+# Install npm modules
+npm install
 
-# Check your code using ESLint against the base of AirBnB rules:
-gulp lint
+# Install bower components
+bower install
 
 # Makes a fully built version of the app, this lints, and run any unit tests on the code:
 gulp build
@@ -30,7 +38,7 @@ Please visit [Google Chrome Extension Development](http://developer.chrome.com/e
 
 ### Babel
 
-The generator supports ES 2015 syntax through babel transforming. The source files are situated in `script.babel`. If thew watch command is running then any changes will automatically get linted, compiled and copied to the `dist` directory.
+ES6 syntax is used through babel transforming. The source files are situated in `script.babel`. If the watch command is running then any changes will automatically get linted, compiled and copied to the `dist` directory.
 
 ```sh
 gulp babel

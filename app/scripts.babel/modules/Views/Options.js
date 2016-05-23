@@ -25,14 +25,16 @@ class Options {
     document.getElementById('token').focus();
 
     document.getElementById('token').value        = '';
-    document.getElementById('domain').value       = '';
     document.getElementById('projects').innerHTML = '';
+    document.getElementById('domain').value       = config.domain;
 
     this._disable(
       document.getElementById('update')
     );
 
     Storage.clear();
+
+    Storage.set('phraseapp.domain', config.domain);
   }
 
   checkForm() {
@@ -78,7 +80,7 @@ class Options {
       );
     }
 
-    Notification.success('Sucessfully saved options');
+    Notification.success('Successfully saved options');
   }
 
   _saveDomain(domain) {
@@ -198,6 +200,9 @@ class Options {
 
     if (null !== (domain = Storage.get('phraseapp.domain'))) {
       domainInput.value = domain;
+    } else {
+      domainInput.value = config.domain;
+      Storage.set('phraseapp.domain', config.domain);
     }
 
     if (null !== (projects = Storage.get('phraseapp.projects'))) {
