@@ -1,3 +1,5 @@
+/dist.pem
+/dist.crx
 node_modules
 temp
 .tmp
