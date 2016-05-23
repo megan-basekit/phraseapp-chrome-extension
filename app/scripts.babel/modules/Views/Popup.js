@@ -50,23 +50,35 @@ class Popup {
   }
 
   save() {
-    let selected = null;
-    const projects = document.getElementById('projects');
-
-    if (typeof projects.options[projects.selectedIndex] !== 'undefined') {
-      selected = projects.options[projects.selectedIndex].value;
-    }
-
-    const data = {
-      project    : selected,
+    const projects        = document.getElementById('projects');
+    const copyToClipboard = Storage.get('phraseapp.clipboard');
+    const data            = {
+      project    : projects.options[projects.selectedIndex].value,
       key        : document.getElementById('key').value.trim(),
       translation: document.getElementById('translation').value.trim(),
       locale     : localStorage.getItem('phraseapp.default.locale')
     };
 
-    Phraseapp.importTranslation(data).then(response => {
+    let message = 'Successfully imported translation.';
+    let project = projects.options[projects.selectedIndex].text;
+
+    Phraseapp.importTranslation(data).then(() => {
       this._resetForm();
-      Notification.success(`Sucessfully imported ${response.key.name}.`);
+
+      if (copyToClipboard) {
+        project = project.replace(new RegExp(' ', 'g'), '-').toLocaleLowerCase();
+
+        const key = data.key.replace(new RegExp(' ', 'g'), '+').toLocaleLowerCase();
+        const baseUrl = `https://phraseapp.com/projects/${project}/locales/${config.locale}/translations`;
+
+        chrome.runtime.sendMessage({
+          type: 'copy',
+          text: `${baseUrl}?translation_search%5Bquery%5D=${key}`
+        });
+        message = 'Successfully imported translation and copied to clipboard.';
+      }
+
+      Notification.success(message);
     }, response => {
       Notification.error(response);
     });
@@ -79,11 +91,11 @@ class Popup {
   }
 
   _hasToken() {
-    return !!Storage.get('phraseapp.token');
+    return Boolean(Storage.get('phraseapp.token'));
   }
 
   _hasProjects() {
-    return !!Storage.get('phraseapp.projects');
+    return Boolean(Storage.get('phraseapp.projects'));
   }
 
   _updateProjectList(projects = []) {

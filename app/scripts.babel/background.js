@@ -26,6 +26,19 @@ chrome.runtime.onInstalled.addListener(() => {
   });
 });
 
+chrome.runtime.onMessage.addListener(message => {
+  if (message && message.type === 'copy') {
+    const input = document.createElement('textarea');
+
+    document.body.appendChild(input);
+    input.value = message.text;
+    input.focus();
+    input.select();
+    document.execCommand('Copy');
+    input.remove();
+  }
+});
+
 // FIXME: This throws errors at random times, should really use chrome.tabs.query
 chrome.extension.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'getSelection') {
