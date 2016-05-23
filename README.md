@@ -59,7 +59,7 @@ This will allow you to build and package the app (.crx) for upload to the Chrome
 gulp build
 ```
 
-You can also distribute the importer as a `(.crx)` file, that can be uploaded to Chrome Developer Dashboard at Chrome Web Store.
+This will create a packaged zip file of the extension.
 
 ```bash
 gulp package
