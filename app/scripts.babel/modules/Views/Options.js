@@ -51,7 +51,14 @@ class Options {
     }
   }
 
+  saveToClipboard() {
+    const clipboard = document.getElementById('clipboard');
+
+    Storage.set('phraseapp.clipboard', clipboard.checked);
+  }
+
   saveOptions() {
+    const previous = Storage.get('phraseapp.token');
     const domain    = document.getElementById('domain');
     const token     = document.getElementById('token');
     const projects  = document.getElementById('projects');
@@ -64,20 +71,13 @@ class Options {
     );
 
     if (Validator.isTokenValid(token.value)) {
-      if (typeof selected !== 'undefined') {
-        Storage.set(
-          'phraseapp.project',
-          {
-            id  : selected.value,
-            name: selected.text
-          }
-        );
-      }
+      this._resetOnTokenChange(previous, token, projects);
 
-      Storage.set(
-        'phraseapp.token',
-        token.value
-      );
+      this._saveToken(token);
+
+      if (projects.options.length) {
+        this._saveProjects(projects, selected);
+      }
     }
 
     Notification.success('Successfully saved options');
@@ -181,15 +181,49 @@ class Options {
     });
   }
 
+  _saveToken(token) {
+    Storage.set(
+      'phraseapp.token',
+      token.value
+    );
+  }
+
+  _saveProjects(projects, selected) {
+    if (projects.options.length) {
+      Storage.set(
+        'phraseapp.project',
+        {
+          id  : selected.value,
+          name: selected.text
+        }
+      );
+    }
+  }
+
+  _resetOnTokenChange(previous, token, projects) {
+    if (previous !== null && token.value !== previous) {
+      projects.options.length = 0;
+      Storage.remove('phraseapp.projects');
+    }
+  }
+
   _init() {
     let token;
     let domain;
+    let clipboard;
     let projects;
 
-    const saveBtn    = document.getElementById('save');
-    const tokenInput = document.getElementById('token');
-    const domainInput = document.getElementById('domain');
-    const updateBtn  = document.getElementById('update');
+    const saveBtn           = document.getElementById('save');
+    const tokenInput        = document.getElementById('token');
+    const domainInput       = document.getElementById('domain');
+    const updateBtn         = document.getElementById('update');
+    const clipboardCheckBox = document.getElementById('clipboard');
+
+    if (null !== (clipboard = Storage.get('phraseapp.clipboard'))) {
+      clipboardCheckBox.checked = clipboard;
+    } else {
+      clipboardCheckBox.checked = config.clipboard;
+    }
 
     if (null !== (token = Storage.get('phraseapp.token'))) {
       tokenInput.value = token;

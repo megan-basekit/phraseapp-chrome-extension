@@ -254,7 +254,7 @@
     ],
     "max-len": [
       2,
-      100,
+      120,
       2
     ],
     "max-nested-callbacks": [
@@ -341,8 +341,8 @@
       2,
       "never"
     ],
-    "quote-props": [ // TODO: fix code that uses this
-      1,
+    "quote-props": [
+      0,
       "as-needed"
     ],
     "quotes": [

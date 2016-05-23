@@ -21,6 +21,7 @@
   "permissions": [
     "storage",
     "activeTab",
+    "clipboardWrite",
     "notifications",
     "declarativeContent",
     "https://api.phraseapp.com/",

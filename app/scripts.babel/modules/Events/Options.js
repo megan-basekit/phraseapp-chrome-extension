@@ -22,6 +22,10 @@ class Options {
   onChange() {
     OptionsView.selectProject();
   }
+
+  onCheckboxChange() {
+    OptionsView.saveToClipboard();
+  }
 }
 
 const e = new Options();
