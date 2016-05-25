@@ -1,6 +1,6 @@
 'use strict';
 
-import PopupView from '../Views/Popup';
+import { PopupView } from '../Views';
 
 class Popup {
   onKeyUp() {

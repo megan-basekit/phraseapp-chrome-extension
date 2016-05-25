@@ -26,16 +26,22 @@
         <div class="one-third column">
             <label for="token">Token:</label>
             <input type="text" class="u-full-width" name="token" id="token" placeholder="Phraseapp token...">
-            <label for="domain">Activate only on this domain:</label>
-            <input type="text" class="u-full-width" name="domain" id="domain"
-                   placeholder="Leave empty for all pages...">
-            <p class="hint">
-                Reload the extension from the settings page for this to take affect.
-            </p>
-            <label for="clipboard">
-                <input type="checkbox" name="clipboard" id="clipboard">
-                <span class="label-body">Copy translation url to clipboard.</span>
+            <label for="collapsible">
+                <button type="button" id="collapsible" class="collapsible" title="Advanced options"></button>
+                <span class="label-body">Advanced options</span>
             </label>
+            <div id="advanced-options" class="closed">
+                <label for="domain">Activate only on this domain:</label>
+                <input type="text" class="u-full-width" name="domain" id="domain"
+                       placeholder="Leave empty for all pages...">
+                <p class="hint">
+                    Reload the extension from the settings for this to take affect.
+                </p>
+                <label for="clipboard">
+                    <input type="checkbox" name="clipboard" id="clipboard">
+                    <span class="label-body">Copy translation url to clipboard.</span>
+                </label>
+            </div>
             <div class="row save-button">
                 <input type="button" name="save" id="save" value="Save" disabled>
                 <input type="button" name="reset" id="reset" value="Reset">

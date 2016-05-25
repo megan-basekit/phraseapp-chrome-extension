@@ -1,6 +1,6 @@
 'use strict';
 
-import Options from './Option';
+import Options from './Options';
 import Popup from './Popup';
 
 export {

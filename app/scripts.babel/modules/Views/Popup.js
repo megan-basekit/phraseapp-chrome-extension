@@ -1,8 +1,8 @@
 'use strict';
 
 import config from '../../Config';
-import Storage from '../Storage/Storage';
-import Phraseapp from '../Api/Phraseapp';
+import { Storage } from '../Storage';
+import { Phraseapp } from '../Api';
 import Notification from '../Notification';
 
 class Popup {
@@ -100,8 +100,8 @@ class Popup {
 
   _updateProjectList(projects = []) {
     let selected;
-    let options = '';
 
+    const options = [];
     const select  = document.getElementById('projects');
     const defaultProject = Storage.get('phraseapp.project');
 
@@ -110,10 +110,10 @@ class Popup {
                 ? 'selected=\'selected\''
                 : '';
 
-      options += `<option ${selected} value=${project.id}>${project.name}</option>`;
+      options.push(`<option ${selected} value=${project.id}>${project.name}</option>`);
     });
 
-    select.innerHTML = options;
+    select.innerHTML = options.join('');
   }
 
   _enableImport() {
@@ -133,7 +133,7 @@ class Popup {
   _disableForm() {
     const elements = document.getElementById('import-form').elements;
 
-    for (let i = elements.length - 1; i >= 0; i--) {
+    for (let i = elements.length - 1; i >= 0; i = i - 1) {
       elements[i].setAttribute('disabled', true);
       elements[i].classList.remove('button-primary');
     }

@@ -1,7 +1,7 @@
 'use strict';
 
 import request from './Request';
-import Storage from '../Storage/Storage';
+import { Storage } from '../Storage';
 
 class Phraseapp {
 

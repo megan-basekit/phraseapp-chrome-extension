@@ -13,15 +13,53 @@ div.row.save-button {
 }
 
 .hint {
-  font-size       : 0.7em;
-  margin-bottom   : 0.8em;
-  text-indent     : 2em;
-  background      : url(../images/information.svg)
-                    center left / 15px 15px
-                    no-repeat;
+  font-size     : 0.7em;
+  margin-bottom : 0.8em;
+  text-indent   : 2em;
+  background    : url(../images/information.svg) center left / 15px 15px no-repeat;
 }
 
 #projects {
-  height : 8em;
+  height : 5em;
 }
 
+label[for=collapsible] span {
+  font-size   : 0.8em;
+  text-indent : 0.2em;
+  margin      : 0;
+  padding     : 0;
+  cursor      : pointer;
+}
+
+.collapsible {
+  background : url(../images/disclosure-close.svg) center left / 10px 10px no-repeat;
+}
+
+.collapsible.open {
+  background : url(../images/disclosure-open.svg) center left / 10px 10px no-repeat;
+}
+
+.collapsible,
+.collapsible:active,
+.collapsible:hover,
+.collapsible:focus {
+  width            : 10px;
+  height           : 10px;
+  padding          : 0;
+  margin           : 0;
+  background-color : transparent;
+  border-color     : transparent;
+}
+
+
+#advanced-options {
+  overflow-y                 : hidden;
+  max-height                 : 130px;
+  transition-property        : all;
+  transition-duration        : .5s;
+  transition-timing-function : cubic-bezier(0, 1, 0.5, 1);
+}
+
+#advanced-options.closed {
+  max-height : 0;
+}

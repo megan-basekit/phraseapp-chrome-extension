@@ -1,8 +1,8 @@
 'use strict';
 
 import config from '../../Config';
-import Phraseapp from '../Api/Phraseapp';
-import Storage from '../Storage/Storage';
+import { Phraseapp } from '../Api';
+import { Storage } from '../Storage';
 import Validator from '../Validator';
 import Notification from '../Notification';
 
@@ -55,6 +55,14 @@ class Options {
     const clipboard = document.getElementById('clipboard');
 
     Storage.set('phraseapp.clipboard', clipboard.checked);
+  }
+
+  advancedOptions() {
+    const options = document.getElementById('advanced-options');
+    const collapsible = document.getElementById('collapsible');
+
+    options.classList.toggle('closed');
+    collapsible.classList.toggle('open');
   }
 
   saveOptions() {
@@ -119,8 +127,8 @@ class Options {
 
   _updateProjectList(projects, defaultProject = null) {
     let selected;
-    let options = '';
 
+    const options = [];
     const select  = document.getElementById('projects');
 
     projects.forEach(project => {
@@ -128,10 +136,10 @@ class Options {
       ? 'selected=\'selected\''
       : '';
 
-      options += `<option ${selected} value=${project.id}>${project.name}</option>`;
+      options.push(`<option ${selected} value=${project.id}>${project.name}</option>`);
     });
 
-    select.innerHTML = options;
+    select.innerHTML = options.join('');
   }
 
   _setDefaultLocaleForProject(id) {

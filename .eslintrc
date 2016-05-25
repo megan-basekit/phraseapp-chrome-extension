@@ -51,7 +51,7 @@
     */
     "comma-dangle": 2,
     "no-cond-assign": 2,
-    "no-console": 1, // TODO: fix code that uses this
+    "no-console": 2,
     "no-constant-condition": 2,
     "no-control-regex": 2,
     "no-debugger": 2,
@@ -156,7 +156,6 @@
     "radix": 2,
     "vars-on-top": 2,
     "wrap-iife": 2,
-    "yoda": 1, // TODO: fix code that uses this
     "strict": 0,
 
     /*
@@ -291,10 +290,9 @@
         "max": 2
       }
     ],
-    "no-negated-condition": 1, // TODO: fix code that uses this
     "no-nested-ternary": 2,
     "no-new-object": 2,
-    "no-plusplus": 1, // TODO: fix code that uses this
+    "no-plusplus": 1,
     "no-restricted-syntax": [
       2,
       "WithStatement"

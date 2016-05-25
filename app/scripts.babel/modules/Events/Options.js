@@ -1,6 +1,6 @@
 'use strict';
 
-import OptionsView from '../Views/Options';
+import { OptionsView } from '../Views';
 
 class Options {
   onSave() {
@@ -25,6 +25,10 @@ class Options {
 
   onCheckboxChange() {
     OptionsView.saveToClipboard();
+  }
+
+  onAdvancedChange() {
+    OptionsView.advancedOptions();
   }
 }
 

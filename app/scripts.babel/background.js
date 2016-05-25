@@ -1,6 +1,6 @@
 'use strict';
 
-import Storage from './modules/Storage/Storage';
+import { Storage } from './modules/Storage';
 
 chrome.runtime.onInstalled.addListener(() => {
   chrome.declarativeContent.onPageChanged.removeRules(null, () => {
@@ -42,25 +42,21 @@ chrome.runtime.onMessage.addListener(message => {
 // FIXME: This throws errors at random times, should really use chrome.tabs.query
 chrome.extension.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'getSelection') {
-    try {
-      chrome.tabs.getSelected(null, tab => {
-        chrome.tabs.sendMessage(
-          tab.id,
-          {
-            action: 'getSelection'
-          },
-          response => {
-            if (typeof response !== 'undefined') {
-              sendResponse({
-                data: response.data
-              });
-            }
+    chrome.tabs.getSelected(null, tab => {
+      chrome.tabs.sendMessage(
+        tab.id,
+        {
+          action: 'getSelection'
+        },
+        response => {
+          if (typeof response !== 'undefined') {
+            sendResponse({
+              data: response.data
+            });
           }
-        );
-      });
-    } catch (e) {
-      console.log(e);
-    }
+        }
+      );
+    });
   }
 
   return true;

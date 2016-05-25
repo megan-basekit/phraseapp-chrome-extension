@@ -5,7 +5,7 @@ class Storage {
     const items = [];
     const length = localStorage.length;
 
-    for (let i = length - 1; i >= 0; i--) {
+    for (let i = length - 1; i >= 0; i = i - 1) {
       const key = localStorage.key(i);
 
       items.push({
