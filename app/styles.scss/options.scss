@@ -53,13 +53,9 @@ label[for=collapsible] span {
 
 
 #advanced-options {
-  overflow-y                 : hidden;
-  max-height                 : 130px;
-  transition-property        : all;
-  transition-duration        : .5s;
-  transition-timing-function : cubic-bezier(0, 1, 0.5, 1);
+  display: block;
 }
 
 #advanced-options.closed {
-  max-height : 0;
+  display: none;
 }
