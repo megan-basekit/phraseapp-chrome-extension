@@ -24,7 +24,7 @@ npm install
 bower install
 
 # Makes a fully built version of the app, this lints, and run any unit tests on the code:
-gulp build
+gulp --gulpfile gulpfile.babel.js build
 ```
 
 ## Testing the extension in developer mode.
@@ -41,14 +41,14 @@ Please visit [Google Chrome Extension Development](http://developer.chrome.com/e
 ES6 syntax is used through babel transforming. The source files are situated in `script.babel`. If the watch command is running then any changes will automatically get linted, compiled and copied to the `dist` directory.
 
 ```sh
-gulp babel
+gulp --gulpfile gulpfile.babel.js babel
 ```
 
 ### Watch
 
 Watch looks for any changes to the files in the `app` folder and performs tasks on them beofre copying to the `dist` folder.
 ```bash
-gulp watch
+gulp --gulpfile gulpfile.babel.js watch
 ```
 
 ### Build and Package
@@ -56,13 +56,13 @@ gulp watch
 This will allow you to build and package the app (.crx) for upload to the Chrome extension store.
 
 ```bash
-gulp build
+gulp --gulpfile gulpfile.babel.js build
 ```
 
 This will create a packaged zip file of the extension.
 
 ```bash
-gulp package
+gulp --gulpfile gulpfile.babel.js package
 ```
 
 ## License
