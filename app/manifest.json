@@ -3,7 +3,7 @@
   "version": "0.0.3",
   "manifest_version": 2,
   "description": "__MSG_appDescription__",
-  "homepage_url": "http://www.basekit.com",
+  "homepage_url": "http://www.insanekitty.co.uk",
   "minimum_chrome_version": "33",
   "icons": {
     "16": "images/icon-16.png",
