@@ -66,19 +66,20 @@ class Options {
   }
 
   saveOptions() {
+    let valid = false;
     const previous = Storage.get('phraseapp.token');
-    const domain    = document.getElementById('domain');
-    const token     = document.getElementById('token');
-    const projects  = document.getElementById('projects');
-    const selected  = projects.options[projects.selectedIndex];
+    const domain   = document.getElementById('domain');
+    const token    = document.getElementById('token');
+    const projects = document.getElementById('projects');
+    const selected = projects.options[projects.selectedIndex];
 
-    this._saveDomain(
+    valid = this._saveDomain(
       domain.value.replace('www.', '')
                   .replace('http://', '')
                   .toLowerCase().trim()
     );
 
-    if (Validator.isTokenValid(token.value)) {
+    if (valid && Validator.isTokenValid(token.value)) {
       this._resetOnTokenChange(previous, token, projects);
 
       this._saveToken(token);
@@ -86,9 +87,9 @@ class Options {
       if (projects.options.length) {
         this._saveProjects(projects, selected);
       }
-    }
 
-    Notification.success('Successfully saved options');
+      Notification.success('Successfully saved options');
+    }
   }
 
   _saveDomain(domain) {
@@ -97,7 +98,10 @@ class Options {
       document.getElementById('domain').classList.remove('error');
     } else {
       document.getElementById('domain').classList.add('error');
+      return false;
     }
+
+    return true;
   }
 
   selectProject() {
