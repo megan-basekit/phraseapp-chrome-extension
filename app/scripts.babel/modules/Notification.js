@@ -2,7 +2,6 @@
 
 const notify = (body, icon) => {
   if (window.Notification) {
-    // eslint-disable-next-line no-new
     new window.Notification('Phraseapp Key Importer', {
       icon,
       body
@@ -10,7 +9,6 @@ const notify = (body, icon) => {
   }
 
   if (!window.Notification) {
-    // eslint-disable-next-line no-alert
     window.alert(body);
   }
 };

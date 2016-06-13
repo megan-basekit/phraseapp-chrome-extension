@@ -7,13 +7,7 @@ import Validator from '../Validator';
 import Notification from '../Notification';
 
 class Options {
-  constructor() {
-    if (null !== document.getElementById('options')) {
-      this._init();
-    }
-  }
-
-  getProjects() {
+  _getProjects() {
     Phraseapp.projects().then(projects => {
       this._setProjects(projects);
     }, response => {
@@ -21,7 +15,7 @@ class Options {
     });
   }
 
-  resetForm() {
+  _resetForm() {
     document.getElementById('token').focus();
 
     document.getElementById('token').value        = '';
@@ -37,7 +31,7 @@ class Options {
     Storage.set('phraseapp.domain', config.domain);
   }
 
-  checkForm() {
+  _checkForm() {
     const token     = document.getElementById('token');
     const saveBtn   = document.getElementById('save');
     const updateBtn = document.getElementById('update');
@@ -51,13 +45,13 @@ class Options {
     }
   }
 
-  saveToClipboard() {
+  _saveToClipboard() {
     const clipboard = document.getElementById('clipboard');
 
     Storage.set('phraseapp.clipboard', clipboard.checked);
   }
 
-  advancedOptions() {
+  _advancedOptions() {
     const options = document.getElementById('advanced-options');
     const collapsible = document.getElementById('collapsible');
 
@@ -65,15 +59,13 @@ class Options {
     collapsible.classList.toggle('open');
   }
 
-  saveOptions() {
-    let valid = false;
+  _saveOptions() {
     const previous = Storage.get('phraseapp.token');
     const domain   = document.getElementById('domain');
     const token    = document.getElementById('token');
     const projects = document.getElementById('projects');
     const selected = projects.options[projects.selectedIndex];
-
-    valid = this._saveDomain(
+    const valid = this._saveDomain(
       domain.value.replace('www.', '')
                   .replace('http://', '')
                   .toLowerCase().trim()
@@ -104,7 +96,7 @@ class Options {
     return true;
   }
 
-  selectProject() {
+  _selectProject() {
     const projects = document.getElementById('projects');
     const selected = projects.options[projects.selectedIndex];
 
@@ -219,7 +211,31 @@ class Options {
     }
   }
 
-  _init() {
+  _events() {
+    document.getElementById('token').onkeyup = () => {
+      this._checkForm();
+    };
+    document.getElementById('save').onclick = () => {
+      this._saveOptions();
+    };
+    document.getElementById('reset').onclick = () => {
+      this._resetForm();
+    };
+    document.getElementById('update').onclick = () => {
+      this._selectProject();
+    };
+    document.getElementById('projects').onchange = () => {
+      this._getProjects();
+    };
+    document.getElementById('clipboard').onchange = () => {
+      this._saveToClipboard();
+    };
+    document.getElementById('collapsible').onclick = () => {
+      this._advancedOptions();
+    };
+  }
+
+  init() {
     let token;
     let domain;
     let clipboard;
@@ -254,9 +270,9 @@ class Options {
     if (null !== (projects = Storage.get('phraseapp.projects'))) {
       this._setProjects(projects);
     }
+
+    this._events();
   }
 }
 
-const v = new Options();
-
-export { v as default };
+export { Options as default };
