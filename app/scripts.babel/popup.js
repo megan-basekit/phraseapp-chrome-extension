@@ -4,7 +4,7 @@ import { PopupView } from './modules/Views';
 import Notify from './modules/Events/Notify';
 
 window.addEventListener('load', () => {
-  Notify.on('clipboard.copyto', (Url) => {
+  Notify.on('clipboard.copyto', Url => {
     chrome.runtime.sendMessage({
       type: 'copy',
       text: Url
