@@ -51,7 +51,7 @@
     */
     "comma-dangle": 2,
     "no-cond-assign": 2,
-    "no-console": 1,
+    "no-console": 0,
     "no-constant-condition": 2,
     "no-control-regex": 2,
     "no-debugger": 2,
@@ -96,7 +96,6 @@
     "dot-notation": 2,
     "eqeqeq": 2,
     "guard-for-in": 2,
-    "no-alert": 1, // TODO: fix code that uses this
     "no-caller": 2,
     "no-case-declarations": 2,
     "no-div-regex": 2,
@@ -119,18 +118,8 @@
     "no-lone-blocks": 2,
     "no-loop-func": 2,
     "no-magic-numbers": 0,
-    // disallow the use of magic numbers
-    //    "no-multi-spaces": ["error", {
-    //      "exceptions": {
-    //        "ImportDeclaration": true ,
-    //        "VariableDeclarator": true,
-    //        "Property": true
-    //      }
-    //    }],
     "no-multi-str": 2,
     "no-native-reassign": 2,
-
-    "no-new": 2,
     "no-new-func": 2,
     "no-new-wrappers": 2,
     "no-octal": 2,
@@ -223,18 +212,6 @@
         "SwitchCase": 1
       }
     ],
-    //"key-spacing": [2, {
-    //    "singleLine": {
-    //        "beforeColon": true,
-    //        "afterColon": true,
-    //        "align": "colon"
-    //    },
-    //    "multiLine": {
-    //        "beforeColon": true,
-    //        "afterColon": true
-    //    }
-    //}],
-
     "linebreak-style": [
       2,
       "unix"

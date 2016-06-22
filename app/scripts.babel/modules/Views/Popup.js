@@ -3,16 +3,11 @@
 import config from '../../Config';
 import { Storage } from '../Storage';
 import { Phraseapp } from '../Api';
+import Notify from '../Events/Notify';
 import Notification from '../Notification';
 
 class Popup {
-  constructor() {
-    if (null !== document.getElementById('popup')) {
-      this._init();
-    }
-  }
-
-  validateForm() {
+  _validateForm() {
     const key         = document.getElementById('key').value.trim();
     const translation = document.getElementById('translation').value.trim();
 
@@ -23,7 +18,7 @@ class Popup {
     }
   }
 
-  changeProject() {
+  _changeProject() {
     const projects      = document.getElementById('projects');
     const selected      = projects.options[projects.selectedIndex];
     const projectLocale = document.getElementById('project_locale');
@@ -49,7 +44,7 @@ class Popup {
     }
   }
 
-  save() {
+  _save() {
     const projects        = document.getElementById('projects');
     const copyToClipboard = Storage.get('phraseapp.clipboard');
     const data            = {
@@ -71,10 +66,8 @@ class Popup {
         const key = data.key.replace(new RegExp(' ', 'g'), '+').toLocaleLowerCase();
         const baseUrl = `https://phraseapp.com/projects/${project}/locales/${config.locale}/translations`;
 
-        chrome.runtime.sendMessage({
-          type: 'copy',
-          text: `${baseUrl}?translation_search%5Bquery%5D=${key}`
-        });
+        Notify.emit('clipboard.copyto', `${baseUrl}?translation_search%5Bquery%5D=${key}`);
+
         message = 'Successfully imported translation and copied to clipboard.';
       }
 
@@ -84,10 +77,8 @@ class Popup {
     });
   }
 
-  showSettings() {
-    chrome.tabs.create({
-      url: `chrome://extensions/?options=${chrome.runtime.id}`
-    });
+  _showSettings() {
+    Notify.emit('settings.show');
   }
 
   _hasToken() {
@@ -148,24 +139,42 @@ class Popup {
   }
 
   _getSelection() {
-    chrome.extension.sendMessage({
-      action: 'getSelection'
-    }, response => {
-      if (typeof response !== 'undefined' && response.data.length > 0) {
-        const key   = document.getElementById('key');
-
-        key.value = response.data;
-      }
-    });
+    Notify.emit('selection.get');
   }
 
-  _init() {
+  _processSelection(selection = null) {
+    if (selection || selection !== null) {
+      document.getElementById('key').value = selection;
+    }
+  }
+
+  _events() {
+    document.getElementById('key').onkeyup = () => {
+      this._validateForm();
+    };
+    document.getElementById('translation').onkeyup = () => {
+      this._validateForm();
+    };
+    document.getElementById('import').onclick = () => {
+      this._save();
+    };
+    document.getElementById('settings').onclick = () => {
+      this._showSettings();
+    };
+    document.getElementById('projects').onchange = () => {
+      this._changeProject();
+    };
+
+    Notify.on('selection.selected', this._processSelection);
+  }
+
+  init() {
     let locale;
     let projects;
 
     if (this._hasToken() === false || this._hasProjects() === false) {
       this._disableForm();
-      this.showSettings();
+      this._showSettings();
     }
 
     if (null !== (locale = Storage.get('phraseapp.default.locale'))) {
@@ -177,9 +186,9 @@ class Popup {
     }
 
     this._getSelection();
+
+    this._events();
   }
 }
 
-const v = new Popup();
-
-export { v as default };
+export { Popup as default };
